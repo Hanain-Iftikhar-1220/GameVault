@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../core/constants.dart';
+import '../../models/game_model.dart';
+import '../../widgets/game_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<GameModel> games = [
+      GameModel(title: 'Cyber Racing', genre: 'Racing'),
+      GameModel(title: 'Shadow Arena', genre: 'Action'),
+      GameModel(title: 'Pixel Warriors', genre: 'Adventure'),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.background,
@@ -18,52 +26,26 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Welcome to GameVault',
+              'Popular Games',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.bold,
               ),
             ),
 
             const SizedBox(height: 20),
 
-            _buildGameCard('Cyber Racing'),
-
-            const SizedBox(height: 12),
-
-            _buildGameCard('Shadow Arena'),
+            Expanded(
+              child: ListView.builder(
+                itemCount: games.length,
+                itemBuilder: (context, index) {
+                  return GameCard(game: games[index]);
+                },
+              ),
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildGameCard(String title) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade700,
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-
-          const SizedBox(width: 16),
-
-          Text(
-            title,
-            style: const TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ],
       ),
     );
   }
