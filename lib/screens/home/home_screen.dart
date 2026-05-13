@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants.dart';
 import '../../models/game_model.dart';
 import '../../widgets/game_card.dart';
+import '../auth/login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -32,6 +33,18 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+
+            const SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
+                );
+              },
+              child: const Text('Login'),
             ),
 
             const SizedBox(height: 20),
